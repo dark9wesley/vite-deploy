@@ -13,7 +13,8 @@ ADD . /app
 
 RUN pnpm run build
 
-CMD npx serve -s dist
+# 选择更小的nginx镜像做服务
+FROM nginx:alpine
 
-EXPOSE 3000
+COPY --from=builder app/dist /usr/share/nginx/html
 
