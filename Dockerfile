@@ -1,12 +1,17 @@
-FROM node:14-alpine
+FROM node:14-alpine as builder
 
-RUN npm i pnpm -g
+RUN apk add --no-cache curl \
+    && curl -sL https://unpkg.com/@pnpm/self-installer | node
 
 WORKDIR /app
 
+ADD package.json pnpm-lock.yaml /app
+
+RUN pnpm i
+
 ADD . /app
 
-RUN pnpm i && pnpm run build
+RUN pnpm run build
 
 CMD npx serve -s dist
 
