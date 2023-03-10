@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import Root from './routes/root'
+import Contact from './routes/contact'
+import ErrorPage from './error-page'
 
 import './index.css'
-import ErrorPage from './error-page'
 
 const router = createBrowserRouter([
   {
@@ -14,8 +15,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/about',
-    element: <div>Hello about</div>,
+    path: '/contacts/:contactId',
+    element: <Contact />,
   },
 ])
 
