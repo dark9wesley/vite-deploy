@@ -5,7 +5,7 @@ RUN apk add --no-cache curl \
 
 WORKDIR /app
 
-ADD package.json pnpm-lock.yaml /app
+ADD package.json pnpm-lock.yaml /app/
 
 RUN pnpm i
 
@@ -15,6 +15,8 @@ RUN pnpm run build
 
 # 选择更小的nginx镜像做服务
 FROM nginx:alpine
+
+ADD nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=builder app/dist /usr/share/nginx/html
 
