@@ -1,7 +1,6 @@
 FROM node:14-alpine as builder
 
-RUN apk add --no-cache curl \
-    && curl -sL https://unpkg.com/@pnpm/self-installer | node
+RUN npm install -g pnpm
 
 WORKDIR /app
 
