@@ -1,0 +1,14 @@
+version: "3"
+services:
+  vite-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # 此处默认从宿主机（host）环境变量中传参，所以在宿主机中需要提前配置好环境变量
+        - ACCESS_KEY_ID
+        - ACCESS_KEY_SECRET
+        - ENDPOINT=oss-cn-shenzhen.aliyuncs.com
+    ports:
+      - 8000:80
+
