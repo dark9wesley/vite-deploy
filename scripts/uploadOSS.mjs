@@ -29,7 +29,7 @@ async function isExistObject(objectName) {
 // objectName: static/css/main.079c3a.css
 // withHash: 该文件名是否携带 hash 值
 async function uploadFile(objectName, withHash = false) {
-  const file = resolve('./build', objectName)
+  const file = resolve('./dist', objectName)
   // 如果路径名称不带有 hash 值，则直接重新上传 -> 此处可优化
   const exist = withHash ? await isExistObject(objectName) : false
   if (!exist) {
@@ -49,12 +49,12 @@ async function uploadFile(objectName, withHash = false) {
 
 async function main() {
   // 首先上传不带 hash 的文件
-  for await (const entry of readdirp('./build', { depth: 0, type: 'files' })) {
+  for await (const entry of readdirp('./dist', { depth: 0, type: 'files' })) {
     queue.add(() => uploadFile(entry.path))
     // uploadFile(entry.path)
   }
   // 上传携带 hash 的文件
-  for await (const entry of readdirp('./build/static', { type: 'files' })) {
+  for await (const entry of readdirp('./dist/assets', { type: 'files' })) {
     queue.add(() => uploadFile(`static/${entry.path}`, true))
     // uploadFile(`static/${entry.path}`, true)
   }
