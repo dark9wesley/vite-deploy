@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "oss:cli": "ossutil cp -rf --meta Cache-Control:no-cache dist oss://wesley-peng/ && ossutil cp -rf --meta Cache-Control:max-age=31536000 dist/assets oss://wesley-peng/assets "
   },
   "dependencies": {
     "react": "^18.2.0",
